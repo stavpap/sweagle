@@ -1,10 +1,12 @@
 # Sweagle
 
 ## Information
+
 This is a Spring Boot 2.1 web application written in the Java programming language destined to run on the JVM with Java 8 (or later). 
-In addition a sample UI application is provided in order to test the backend endpoints. The UI was implemented with AngularJs 8.
+In addition a basic UI application is provided in order to test the backend endpoints. The UI was implemented with AngularJs 8.
 
 ## Pre-requisites
+
 In order to compile and run the source code of this project
 you need to setup:
 
@@ -23,24 +25,30 @@ contain all required software in their official repositories.
  - Run the schema_intro.sql , in order to create required the database and tables.
  - Run the initial_values.sql in order to insert some initial rows in your database mainly used for tests.
  - Replace the following values in pom.xml with your own database credentials:
- ```<url>jdbc:mysql://localhost:3306/sweagle?serverTimezone=UTC</url>
+ ```
+ <url>jdbc:mysql://localhost:3306/sweagle?serverTimezone=UTC</url>
 <user>root</user>
 <password>root</password>
 ```
  - Replace the following values in application.properties with your own database credentials:
- spring.datasource.url=jdbc:mysql://localhost:3306/sweagle?serverTimezone=UTC
+
+spring.datasource.url=jdbc:mysql://localhost:3306/sweagle?serverTimezone=UTC
+ 
 spring.datasource.username=root
+
 spring.datasource.password=root,
  - From inside the swagger-api folder run mvn spring-boot:run. The api is accesible on http://localhost:8080.
  - From inside the swagger-ui folder run npm install
  - From the same location run npm run ng serve. The UI is accessible through http://localhost:4600
 
 ##High level architecture
+
 The following diagram describes the components of the application, as well as some further additions that can be done.
 
 (https://drive.google.com/file/d/1PGKUkkYlXcWShgWxrZIhDK-_tkhcSZ9s/view?usp=sharing)
 
 ##Database
+
 The database used is MySQL. Below is the schema of the database.
 
 (https://drive.google.com/open?id=1AuSz0xkCGHLaH4bz-gaKKI6C8GIygIQn)
@@ -52,7 +60,9 @@ The database used is MySQL. Below is the schema of the database.
  - The data of the payload are stored as BLOB type in the database. This type can store file of a maximum 64KB size. For bigger files there is also MEDIUMBLOB or LONGBLOB. Furthermore a No-SQL database could like MongoDB. MongoDB is a document database with no relations, so is more suitable for storing large files. However if it is necessary to store large files (like high quality images or videos), then a file system based solution should be considered. Of course for each solution there are pros and cons. For databases it is easier to manage replicate, back up and data integrity and consistency. On the other side the file system is designed to store and serve files and there is no limit on the file size. So the business could really help us take the decision.
  - The datasets and payload should be inserted/deleted in a transactional way in our code, so that if a payload is failed to be inserted/deleted then no dataset will be inserted/deleted as well or vice versa.
 
+
 ##API
+
 A RESTful approach was followed on the design of the API. More details can be found on the documentation of the WebController, inside our code. Of course further improvements can be done, some of which are the following:
 
  - Introduce swagger for API documentation.
