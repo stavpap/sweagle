@@ -1,0 +1,27 @@
+<table class="table table-hover thead-dark">
+  <thead>
+  <tr>
+      <td>Dataset Name</td>
+      <td>Dataset Description</td>
+      <td>Payload id</td>
+      <td>Payload Created At</td>
+      <td>Payload Updated At</td>
+      <td>Payload Data</td>
+      <td colspan="2">Actions</td>
+  </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let dataset of datasets">
+          <td>{{ dataset.name }}</td>
+          <td>{{ dataset.description }}</td>
+          <td>{{ dataset.payload.id }}</td>
+          <td>{{ dataset.payload.createDate }}</td>
+          <td>{{ dataset.payload.updateDate }}</td>
+          <td>
+              <img [src]="dataset.payload.image.changingThisBreaksApplicationSecurity" />
+          </td>
+          <td><a [routerLink]="" class="btn btn-danger">Delete</a></td>
+      </tr>
+  </tbody>
+</table>
