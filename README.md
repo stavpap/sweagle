@@ -25,7 +25,8 @@ contain all required software in their official repositories.
  - Run the schema_intro.sql , in order to create required the database and tables.
  - Run the initial_values.sql in order to insert some initial rows in your database mainly used for tests.
  - Replace the following values in pom.xml with your own database credentials:
- ```
+
+```
  <url>jdbc:mysql://localhost:3306/sweagle?serverTimezone=UTC</url>
 <user>root</user>
 <password>root</password>
