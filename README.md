@@ -3,7 +3,7 @@
 ## Information
 
 This is a Spring Boot 2.1 web application written in the Java programming language destined to run on the JVM with Java 8 (or later). 
-In addition a basic UI application is provided in order to test the backend endpoints. The UI was implemented with AngularJs 8.
+In addition a basic UI application is provided in order to test the backend endpoints. The UI was implemented with Angular 8.
 
 ## Pre-requisites
 
@@ -38,27 +38,27 @@ spring.datasource.url=jdbc:mysql://localhost:3306/sweagle?serverTimezone=UTC
 spring.datasource.username=root
 
 spring.datasource.password=root,
- - From inside the swagger-api folder run mvn spring-boot:run. The api is accesible on http://localhost:8080.
- - From inside the swagger-ui folder run npm install
+ - Inside the swagger-api folder run mvn spring-boot:run. The api is accesible on http://localhost:8080.
+ - Inside the swagger-ui folder run npm install
  - From the same location run npm run ng serve. The UI is accessible through http://localhost:4600
 
 ## High level architecture
 
 The following diagram describes the components of the application, as well as some further additions that can be done.
 
-(https://drive.google.com/file/d/1PGKUkkYlXcWShgWxrZIhDK-_tkhcSZ9s/view?usp=sharing)
+![diagram](https://drive.google.com/uc?id=1PGKUkkYlXcWShgWxrZIhDK-_tkhcSZ9s)
 
 ## Database
 
 The database used is MySQL. Below is the schema of the database.
 
-(https://drive.google.com/open?id=1AuSz0xkCGHLaH4bz-gaKKI6C8GIygIQn)
+![DB schema](https://drive.google.com/uc?id=1AuSz0xkCGHLaH4bz-gaKKI6C8GIygIQn)
  
  Some thoughts on the database design:
 - In order to achieve the one to one relationship between the datasets and the payloads, the payload table has a column called dataset_id. This column is a foreign key to dataset's id column and also the values of this column are unique. 
  - In order to avoid having datasets without payload, the initial thought was to have also a payload_id foreign, unique key in the dataset table. But this would make our schema more complex and also our code more complex. So keeping it simple with one foreign key was preferred and our code ensures that no datasets are inserted with no payload.
  - The create_date and update_date columns are MySQL timestamps and are stored in UTC. These values  are automatically initialized to the current timestamp , as default value.
- - The data of the payload are stored as BLOB type in the database. This type can store file of a maximum 64KB size. For bigger files there is also MEDIUMBLOB or LONGBLOB. Furthermore a No-SQL database could like MongoDB. MongoDB is a document database with no relations, so is more suitable for storing large files. However if it is necessary to store large files (like high quality images or videos), then a file system based solution should be considered. Of course for each solution there are pros and cons. For databases it is easier to manage replicate, back up and data integrity and consistency. On the other side the file system is designed to store and serve files and there is no limit on the file size. So the business could really help us take the decision.
+ - The data of the payload are stored as BLOB type in the database. This type can store file of a maximum 64KB size. For bigger files there is also MEDIUMBLOB or LONGBLOB. Furthermore a No-SQL database could like MongoDB. MongoDB is a document database with no relations, so is more suitable for storing large files. However if it is necessary to store large files (like high quality images or videos), then a file system based solution should be considered. Of course for each solution there are pros and cons. For databases it is easier to manage replicate, back up and data integrity and consistency. On the other side the file system is designed to store and serve files and there is no limit on the file size. So the business requirements are going to define some specs in order to properly select a solution between those trade offs
  - The datasets and payload should be inserted/deleted in a transactional way in our code, so that if a payload is failed to be inserted/deleted then no dataset will be inserted/deleted as well or vice versa.
 
 
@@ -90,6 +90,16 @@ interactions with the database.
 The database access layer classes can be found in the
 com.syntax.sweagleapi.repository package. They define the
 Spring Data Repositories for interacting with the MySQL database.
+
+
+# UI
+
+The basic UI has the following functionality:
+
+ - List all the datasets existing.
+ - Parse payload data as image(so if a dataset with payload data a base64 encoded image is inserted using the api then the UI will display this dataset with the image)
+
+ 
 
 # Suggestions for further improvements
 

@@ -16,7 +16,7 @@ export class DatasetsService {
   deleteDataset(id) {
     return this
               .http
-              .delete(`http://localhost:8080/delete/${id}`);
+              .delete(`http://localhost:8080/datasets/${id}`);
   }
 
 }

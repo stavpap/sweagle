@@ -21,7 +21,7 @@ export class DatasetGetComponent implements OnInit {
         var that = this;
         data.forEach(function(ds) {
         ds.payload.image = that._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-                 + ds.payload.filePayload);;
+                 + ds.payload.data);
         });
 
         this.datasets = data;
