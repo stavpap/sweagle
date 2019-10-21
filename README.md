@@ -41,13 +41,13 @@ spring.datasource.password=root,
  - From inside the swagger-ui folder run npm install
  - From the same location run npm run ng serve. The UI is accessible through http://localhost:4600
 
-##High level architecture
+## High level architecture
 
 The following diagram describes the components of the application, as well as some further additions that can be done.
 
 (https://drive.google.com/file/d/1PGKUkkYlXcWShgWxrZIhDK-_tkhcSZ9s/view?usp=sharing)
 
-##Database
+## Database
 
 The database used is MySQL. Below is the schema of the database.
 
@@ -61,7 +61,7 @@ The database used is MySQL. Below is the schema of the database.
  - The datasets and payload should be inserted/deleted in a transactional way in our code, so that if a payload is failed to be inserted/deleted then no dataset will be inserted/deleted as well or vice versa.
 
 
-##API
+## API
 
 A RESTful approach was followed on the design of the API. More details can be found on the documentation of the WebController, inside our code. Of course further improvements can be done, some of which are the following:
 
